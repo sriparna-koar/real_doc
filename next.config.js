@@ -1,3 +1,8 @@
+// module.exports = {
+//   reactStrictMode: true,
+// }
 module.exports = {
-  reactStrictMode: true,
-}
+  env: {
+    NEXTAUTH_URL: 'http://localhost:3000'
+  }
+};
