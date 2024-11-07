@@ -186,11 +186,11 @@ const Home = () => {
   useEffect(() => {
     if (session) {
       axios
-        .get('http://localhost:4000/api/documents')
+        .get('https://real-doc.onrender.com/api/documents')
         .then((res) => setDocuments(res.data))
         .catch((err) => console.error(err));
 
-      socket = io('http://localhost:4000');
+      socket = io('https://real-doc.onrender.com');
       socket.emit('join-room', 'document-room', session.user.id);
 
       socket.on('receive-message', ({ msg, sender }) => {
@@ -212,7 +212,7 @@ const Home = () => {
     const owner = session?.user?.name || manualName;
     if (!owner) return alert('Owner is required');
     try {
-      const res = await axios.post('http://localhost:4000/api/documents', { title, owner });
+      const res = await axios.post('https://real-doc.onrender.com/api/documents', { title, owner });
       setDocuments([...documents, res.data]);
       setTitle('');
     } catch (error) {

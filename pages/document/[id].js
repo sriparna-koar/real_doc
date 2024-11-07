@@ -99,12 +99,12 @@ const DocumentPage = ({ currentUser }) => {
     if (!id) return;
 
     // Fetch the document content from the backend
-    axios.get(`http://localhost:4000/api/documents/${id}`)
+    axios.get(`https://real-doc.onrender.com/api/documents/${id}`)
       .then((res) => setContent(res.data.content))
       .catch((err) => alert('Error loading document'));
 
     // Initialize socket connection
-    socket = io('http://localhost:4000');
+    socket = io('https://real-doc.onrender.com');
     socket.emit('join_document', id, currentUser);
 
     socket.on('edit_document', (updatedContent) => {
@@ -126,7 +126,7 @@ const DocumentPage = ({ currentUser }) => {
   }, [id, currentUser]);
   const handleSuggestion = async () => {
     try {
-      const { data } = await axios.post('http://localhost:4000/api/suggest', { text: content });
+      const { data } = await axios.post('https://real-doc.onrender.comapi/suggest', { text: content });
       setSuggestedText(data.suggestion);
     } catch (error) {
       console.error('Error fetching suggestion:', error.response?.data || error.message);
@@ -146,7 +146,8 @@ const DocumentPage = ({ currentUser }) => {
     socket.emit('cursor_position', { docId: id, cursorPosition, user: currentUser });
   };
   const handleSave = () => {
-    axios.put(`http://localhost:4000/api/documents/${id}`, { content })
+    // axios.put(`http://localhost:4000/api/documents/${id}`, { content })
+    axios.put(`https://real-doc.onrender.com/api/documents/${id}`, { content })
       .then((response) => {
         alert('Document saved successfully');
         setDocuments((prevDocuments) =>
