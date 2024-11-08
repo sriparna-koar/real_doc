@@ -14,12 +14,18 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: { origin: '*' },
 });
-// const hf = new HfInference(process.env.HF_API_KEY);
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:4000'],
+  origin: ['http://localhost:3000', 'http://localhost:4000', 'https://realdoc-delta.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
+// const hf = new HfInference(process.env.HF_API_KEY);
+// app.use(cors({
+//   origin: ['http://localhost:3000', 'http://localhost:4000'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true
+// }));
 app.use(express.json());
 
 // MongoDB connection
